@@ -23,6 +23,7 @@ export function Login({ onSubmit, isLoading = false }: LoginProps) {
     try {
       await onSubmit(username, password)
     } catch (error) {
+      console.log(error)
       const message = error instanceof Error ? error.message : 'Connexion impossible'
       toast.error(message)
     }
