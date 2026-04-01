@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { toast } from 'sonner'
+import { CopyIcon, CheckIcon } from '@radix-ui/react-icons'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/common/Card'
 import { Input } from '../components/common/Input'
 import { Button } from '../components/common/Button'
@@ -14,20 +15,29 @@ interface OtpProps {
 
 export function Otp({ onVerify, isLoading = false, mode = 'login', setupData }: OtpProps) {
   const [code, setCode] = useState(['', '', '', '', '', ''])
+  const [copied, setCopied] = useState(false)
   const inputsRef = useRef<Array<HTMLInputElement | null>>([])
+
+  // Fonction pour copier le secret
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+    setCopied(true)
+    toast.success('Secret copié dans le presse-papier')
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     const joined = code.join('')
     if (joined.length !== 6) {
-      toast.error('Veuillez entrer un code OTP a 6 chiffres.')
+      toast.error('Veuillez entrer un code OTP à 6 chiffres.')
       return
     }
 
     try {
       await onVerify(joined)
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Verification OTP invalide'
+      const message = error instanceof Error ? error.message : 'Vérification OTP invalide'
       toast.error(message)
     }
   }
@@ -54,41 +64,59 @@ export function Otp({ onVerify, isLoading = false, mode = 'login', setupData }: 
       <div className="relative w-full max-w-md">
         <Card className="glass-panel shadow-elegant-lg">
           <CardHeader>
-            <CardTitle>{mode === 'setup' ? 'Configuration MFA' : 'Verification OTP'}</CardTitle>
+            <CardTitle>{mode === 'setup' ? 'Configuration MFA' : 'Vérification OTP'}</CardTitle>
             <CardDescription>
               {mode === 'setup'
-                ? 'Configurer le secret key puis entrez le code OTP.'
-                : 'Entrez le code 6 chiffres depuis Google Authenticator.'}
+                ? 'Congigurez la double authentification en utilisant le secret de secours, puis entrez le code OTP généré.'
+                : 'Entrez le code à 6 chiffres depuis votre application d’authentification.'}
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-6">
               {mode === 'setup' && (
-                <div className="space-y-3 rounded-xl border border-violet-100/80 p-4 dark:border-white/10">
+                <div className="space-y-4 rounded-xl border border-violet-100/80 p-4 dark:border-white/10">
                   {setupData?.qr_code_base64 ? (
-                    <img src={setupData.qr_code_base64} alt="QR Code MFA" className="mx-auto h-44 w-44 rounded-lg" />
+                    <div className="flex justify-center bg-white p-2 rounded-lg max-w-[180px] mx-auto shadow-sm">
+                        <img src={setupData.qr_code_base64} alt="QR Code MFA" className="h-40 w-40" />
+                    </div>
                   ) : (
-                    <p className="text-xs text-amber-700 dark:text-amber-300">
-                      Configurez manuellement avec le secret ci-dessous dans l'application Google Authenticator.
+                    <p className="text-xs text-amber-700 dark:text-amber-300 text-center">
+                      Configurez manuellement avec le secret ci-dessous.
                     </p>
                   )}
+                  
                   {setupData?.secret ? (
-                    <div className="rounded-lg bg-violet-50/70 p-2 dark:bg-white/5">
-                      <p className="text-xs text-slate-500 dark:text-slate-400">Secret MFA</p>
-                      <p className="mt-1 break-all font-mono text-sm">{setupData.secret}</p>
+                    <div className="rounded-lg bg-violet-50/70 p-3 dark:bg-white/5 border border-violet-100 dark:border-white/5">
+                      <div className="flex items-center justify-between mb-1.5">
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Secret de secours</p>
+                        <button
+                          type="button"
+                          onClick={() => copyToClipboard(setupData.secret)}
+                          className="flex items-center gap-1.5 text-[10px] font-bold uppercase text-violet-600 hover:text-violet-800 dark:text-violet-400 dark:hover:text-violet-300 transition-all active:scale-95"
+                        >
+                          {copied ? (
+                            <>
+                              <CheckIcon className="w-3.5 h-3.5" />
+                              Copié
+                            </>
+                          ) : (
+                            <>
+                              <CopyIcon className="w-3.5 h-3.5" />
+                              Copier
+                            </>
+                          )}
+                        </button>
+                      </div>
+                      <p className="break-all font-mono text-sm font-medium tracking-widest text-slate-700 dark:text-slate-200">
+                        {setupData.secret}
+                      </p>
                     </div>
                   ) : null}
-                  {/* {setupData?.otp_auth_url ? (
-                    <div>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">OTP Auth URL</p>
-                      <p className="mt-1 break-all text-xs text-slate-600 dark:text-slate-300">{setupData.otp_auth_url}</p>
-                    </div>
-                  ) : null} */}
                 </div>
               )}
 
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Code OTP</label>
+              <div className="space-y-3">
+                <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Code de vérification</label>
                 <div className="grid grid-cols-6 gap-2">
                   {code.map((digit, index) => (
                     <Input
@@ -102,7 +130,7 @@ export function Otp({ onVerify, isLoading = false, mode = 'login', setupData }: 
                       value={digit}
                       onChange={(e) => handleChange(index, e.target.value)}
                       onKeyDown={(e) => handleKeyDown(index, e)}
-                      className="h-12 text-center text-lg"
+                      className="h-12 text-center text-xl font-bold focus:ring-2 focus:ring-violet-500 transition-all shadow-sm"
                       autoComplete={index === 0 ? 'one-time-code' : 'off'}
                       required
                     />
@@ -110,12 +138,12 @@ export function Otp({ onVerify, isLoading = false, mode = 'login', setupData }: 
                 </div>
               </div>
 
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full py-6 text-base font-bold shadow-lg shadow-violet-500/20" disabled={isLoading}>
                 {isLoading
-                  ? 'Verification...'
+                  ? 'Vérification en cours...'
                   : mode === 'setup'
-                    ? 'Activer MFA'
-                    : 'Verifier et continuer'}
+                    ? 'Activer la double authentification'
+                    : 'Vérifier et continuer'}
               </Button>
             </form>
           </CardContent>
