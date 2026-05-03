@@ -137,13 +137,13 @@ const generatePDF = () => {
   const churnRate = 100 - (kpis?.active_customers_rate ?? 0)
 
   return (
-    <div className="space-y-8 animate-fade-in pb-10 text-slate-900 dark:text-white">
+    <div className="space-y-8 animate-fade-in pb-10 text-slate-900">
       
       {/* HEADER AVEC FILTRES */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-6 dark:border-white/10">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-6">
         <div className="space-y-1">
           <h1 className="text-3xl font-bold tracking-tight">Analytics</h1>
-          <p className="text-slate-500 dark:text-slate-400 text-sm italic font-medium">
+          <p className="text-slate-500 text-sm italic font-medium">
             Filtre actif : {selectedSegment === 'all' ? 'Base globale' : 'Segment personnalisé'}
           </p>
         </div>
@@ -155,7 +155,7 @@ const generatePDF = () => {
       </div>
 
       {/* BARRE DE FILTRES INTELLIGENTE */}
-      <Card className="border-none shadow-sm bg-slate-50/50 dark:bg-white/5 backdrop-blur-sm border-l-4 border-l-violet-500">
+      <Card className="border-none shadow-sm bg-slate-50/50 backdrop-blur-sm border-l-4 border-l-violet-500">
         <CardContent className="p-4 flex flex-wrap items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
@@ -174,7 +174,7 @@ const generatePDF = () => {
                 onChange={(e) => setDateRange(prev => ({...prev, end: e.target.value}))}
               />
             </div>
-            <div className="h-6 w-px bg-slate-200 dark:bg-white/10" />
+            <div className="h-6 w-px bg-slate-200" />
             <div className="flex items-center gap-2">
               <MixIcon className="text-violet-500 w-4 h-4" />
               <select 
@@ -189,7 +189,7 @@ const generatePDF = () => {
               </select>
             </div>
           </div>
-          <Badge className="bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400">
+          <Badge className="bg-violet-100 text-violet-700">
             {kpis?.total_customers} clients ciblés
           </Badge>
         </CardContent>
@@ -198,7 +198,7 @@ const generatePDF = () => {
       {/* RÉCAPITULATIF COMPARATIF DES SEGMENTS */}
       <div className="grid gap-4 grid-cols-1 md:grid-cols-4 lg:grid-cols-5">
          {dashboardData?.all_segments_summary?.map((seg, i) => (
-           <div key={i} className="bg-white dark:bg-white/5 p-4 rounded-xl border border-slate-100 dark:border-white/10 flex flex-col justify-between shadow-sm">
+           <div key={i} className="bg-white p-4 rounded-xl border border-slate-100 flex flex-col justify-between shadow-sm">
               <p className="text-[9px] font-black uppercase text-slate-400 tracking-tighter">{seg.name}</p>
               <div>
                 <p className="text-lg font-bold text-violet-600">{Number(seg.revenue).toLocaleString()} MRU</p>
@@ -221,17 +221,17 @@ const generatePDF = () => {
       <div className="grid gap-6 lg:grid-cols-2">
         {/* PERFORMANCE CAMPAGNES FILTRÉES */}
         <Card className="lg:col-span-2 border-none shadow-elegant overflow-hidden">
-          <CardHeader className="bg-slate-50/50 dark:bg-white/5 border-b dark:border-white/5">
+          <CardHeader className="bg-slate-50/50 border-b">
             <CardTitle className="text-sm font-bold flex items-center gap-2">
               <RocketIcon className="text-violet-500" /> Ventes Campagnes (Post-Ciblage)
             </CardTitle>
             <CardDescription className="text-[10px]">Revenu généré par les clients du segment ciblés par ces campagnes</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
-            <div className="divide-y dark:divide-white/5">
+            <div className="divide-y">
               {dashboardData?.campaign_performance?.length > 0 ? (
                 dashboardData.campaign_performance.map((camp, i) => (
-                  <div key={i} className="flex items-center justify-between p-4 hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors">
+                  <div key={i} className="flex items-center justify-between p-4 hover:bg-slate-50/50 transition-colors">
                     <div className="space-y-1">
                       <p className="text-xs font-black uppercase tracking-tight">{camp.name}</p>
                       <Badge variant="outline" className="text-[8px] uppercase font-mono">{camp.status}</Badge>
@@ -241,7 +241,7 @@ const generatePDF = () => {
                         <p className="text-xs font-bold text-emerald-500">ROI x{Number(camp.roi).toFixed(1)}</p>
                         <p className="text-[10px] font-mono text-slate-400">{Number(camp.revenue || 0).toLocaleString()} MRU</p>
                       </div>
-                      <div className="w-16 h-1 bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden">
+                      <div className="w-16 h-1 bg-slate-100 rounded-full overflow-hidden">
                         <div className="h-full bg-violet-500" style={{ width: `${Math.min(camp.roi * 10, 100)}%` }} />
                       </div>
                     </div>
@@ -281,7 +281,7 @@ const generatePDF = () => {
 
       {/* TOP VILLES POUR LE SEGMENT */}
       <Card className="border-none shadow-elegant overflow-hidden">
-        <CardHeader className="bg-slate-50/50 dark:bg-white/5 border-b dark:border-white/10">
+        <CardHeader className="bg-slate-50/50 border-b">
           <CardTitle className="text-sm font-bold flex items-center gap-2">
             <LayersIcon className="text-violet-500" /> Répartition Géographique du Segment
           </CardTitle>
@@ -289,19 +289,19 @@ const generatePDF = () => {
         <CardContent className="p-0">
           <table className="w-full text-left">
             <thead>
-              <tr className="text-[10px] uppercase tracking-widest text-slate-400 border-b dark:border-white/10">
+              <tr className="text-[10px] uppercase tracking-widest text-slate-400 border-b">
                 <th className="px-6 py-4">Ville</th>
                 <th className="px-6 py-4 text-center">Nombre de Clients</th>
                 <th className="px-6 py-4 text-right">CA Généré (MRU)</th>
                 <th className="px-6 py-4 text-right">Poids (%)</th>
               </tr>
             </thead>
-            <tbody className="divide-y dark:divide-white/5 text-sm font-medium">
+            <tbody className="divide-y text-sm font-medium">
               {dashboardData?.by_city?.map((city, i) => (
-                <tr key={i} className="hover:bg-slate-50/50 dark:hover:bg-white/5 transition-colors">
+                <tr key={i} className="hover:bg-slate-50/50 transition-colors">
                   <td className="px-6 py-4 font-bold">{city.city || 'Non renseigné'}</td>
                   <td className="px-6 py-4 text-center">
-                    <span className="bg-slate-100 dark:bg-white/10 px-2 py-1 rounded text-[10px]">{city.value}</span>
+                    <span className="bg-slate-100 px-2 py-1 rounded text-[10px]">{city.value}</span>
                   </td>
                   <td className="px-6 py-4 text-right font-mono font-bold text-emerald-600">
                     {Number(city.revenue || 0).toLocaleString()}
@@ -321,10 +321,10 @@ const generatePDF = () => {
 
 function StatCard({ title, value, sub, icon, trend = "up" }) {
   return (
-    <Card className="border-none shadow-sm bg-white dark:bg-white/5 transition-transform hover:scale-[1.02]">
+    <Card className="border-none shadow-sm bg-white transition-transform hover:scale-[1.02]">
       <CardContent className="p-5">
         <div className="flex justify-between items-start mb-4">
-          <div className="p-2.5 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-100 dark:border-white/10">
+          <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
             {icon}
           </div>
           <Badge className={`text-[9px] font-black border-none ${trend === 'up' ? 'bg-emerald-500/10 text-emerald-600' : 'bg-rose-500/10 text-rose-600'}`}>

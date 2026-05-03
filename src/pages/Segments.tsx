@@ -127,12 +127,12 @@ export function Segments() {
   }
 
   return (
-    <div className="space-y-8 animate-fade-in pb-10 text-slate-900 dark:text-white">
+    <div className="space-y-8 animate-fade-in pb-10 text-slate-900">
       {/* Header Statistique */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-6 dark:border-white/10">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-6">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Segmentation</h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">Gérez vos audiences dynamiques pour le ciblage.</p>
+          <p className="text-sm text-slate-500">Gérez vos audiences dynamiques pour le ciblage.</p>
         </div>
         <Button className="gap-2 bg-violet-600 hover:bg-violet-700 shadow-lg shadow-violet-500/20" onClick={() => { setEditingSegment(null); setForm(EMPTY_FORM); setIsModalOpen(true); }}>
           <PlusIcon className="w-5 h-5" /> Nouveau Segment
@@ -150,7 +150,7 @@ export function Segments() {
       <div className="relative group max-w-md">
         <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-violet-500 transition-colors" />
         <Input 
-          className="pl-11 h-11 bg-white dark:bg-white/5 border-none shadow-sm focus:ring-2 ring-violet-500/20"
+          className="pl-11 h-11 bg-white border-none shadow-sm focus:ring-2 ring-violet-500/20"
           placeholder="Rechercher une audience..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -162,8 +162,8 @@ export function Segments() {
         {isLoading ? (
           <p className="text-slate-500 animate-pulse">Chargement des segments...</p>
         ) : filteredSegments.map((segment) => (
-          <Card key={segment.id} className="border-none shadow-elegant bg-white dark:bg-white/5 group hover:ring-2 ring-violet-500/20 transition-all">
-            <CardHeader className="pb-3 border-b dark:border-white/5">
+          <Card key={segment.id} className="border-none shadow-elegant bg-white group hover:ring-2 ring-violet-500/20 transition-all">
+            <CardHeader className="pb-3 border-b">
               <div className="flex justify-between items-start">
                 <div className="space-y-1">
                   <CardTitle className="text-base font-bold truncate pr-4">{segment.name}</CardTitle>
@@ -171,7 +171,7 @@ export function Segments() {
                     <CalendarIcon /> Créé par {segment.created_by}
                   </p>
                 </div>
-                <div className="h-10 w-10 rounded-xl bg-violet-50 dark:bg-violet-500/10 flex items-center justify-center text-violet-600 font-bold text-xs">
+                <div className="h-10 w-10 rounded-xl bg-violet-50 flex items-center justify-center text-violet-600 font-bold text-xs">
                   {segment.customer_count}
                 </div>
               </div>
@@ -182,7 +182,7 @@ export function Segments() {
                 {rulesToBadges(segment.rules)}
               </div>
               
-              <div className="flex items-center justify-between pt-4 border-t dark:border-white/5">
+              <div className="flex items-center justify-between pt-4 border-t">
                 <div className="flex items-center gap-1 text-[10px] text-slate-400 italic">
                   <InfoCircledIcon /> Audience dynamique
                 </div>
@@ -215,8 +215,8 @@ export function Segments() {
       {/* Modal - Look Premium */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-          <Card className="w-full max-w-xl bg-white dark:bg-slate-950 border-none shadow-2xl overflow-hidden">
-            <CardHeader className="bg-slate-50 dark:bg-white/5 border-b dark:border-white/10 relative">
+          <Card className="w-full max-w-xl bg-white border-none shadow-2xl overflow-hidden">
+            <CardHeader className="bg-slate-50 border-b relative">
               <CardTitle>{editingSegment ? 'Modifier l\'audience' : 'Nouveau Segment'}</CardTitle>
               <CardDescription>L'audience se mettra à jour automatiquement selon ces règles.</CardDescription>
               <button onClick={() => setIsModalOpen(false)} className="absolute right-4 top-4 text-slate-400 hover:text-slate-600 transition-colors">
@@ -241,7 +241,7 @@ export function Segments() {
                     <select 
                       value={form.gender} 
                       onChange={(e) => setForm(f => ({...f, gender: e.target.value as any}))}
-                      className="w-full h-10 px-3 rounded-lg border border-slate-100 dark:border-white/10 bg-transparent text-sm"
+                      className="w-full h-10 px-3 rounded-lg border border-slate-100 bg-transparent text-sm"
                     >
                       <option value="">Tous</option>
                       <option value="M">Hommes</option>
@@ -272,9 +272,9 @@ export function Segments() {
 // --- SOUS-COMPOSANTS ---
 function StatCard({ title, value, icon }: { title: string, value: string | number, icon: React.ReactNode }) {
   return (
-    <Card className="border-none shadow-sm bg-white dark:bg-white/5">
+    <Card className="border-none shadow-sm bg-white">
       <CardContent className="p-5 flex items-center gap-4">
-        <div className="p-3 bg-slate-50 dark:bg-white/10 rounded-2xl">{icon}</div>
+        <div className="p-3 bg-slate-50 rounded-2xl">{icon}</div>
         <div>
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{title}</p>
           <p className="text-2xl font-black tracking-tight">{value}</p>

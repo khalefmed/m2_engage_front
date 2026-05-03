@@ -99,12 +99,12 @@ export function Clients() {
   }
 
   return (
-    <div className="space-y-6 animate-fade-in pb-10 text-slate-900 dark:text-white">
+    <div className="space-y-6 animate-fade-in pb-10 text-slate-900">
       {/* HEADER */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Clients</h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium italic">
+          <p className="text-xs sm:text-sm text-slate-500 font-medium italic">
             Visualisation et segmentation multicritères.
           </p>
         </div>
@@ -119,7 +119,7 @@ export function Clients() {
             <UploadIcon /> {importMutation.isPending ? 'Traitement...' : 'Importer'}
           </Button>
 
-          <div className="flex bg-slate-100 dark:bg-white/5 p-1 rounded-xl border dark:border-white/10 shrink-0">
+          <div className="flex bg-slate-100 p-1 rounded-xl border shrink-0">
             <Button variant={activeTab === 'list' ? 'default' : 'ghost'} size="sm" className="h-8 px-3 text-xs" onClick={() => setActiveTab('list')}>
               <ViewHorizontalIcon className="mr-2" /> Liste
             </Button>
@@ -131,8 +131,8 @@ export function Clients() {
       </div>
 
       {activeTab === 'list' ? (
-        <Card className="border-none shadow-elegant overflow-hidden bg-white dark:bg-white/5">
-          <CardHeader className="px-4 py-5 border-b dark:border-white/5 bg-slate-50/30 dark:bg-transparent">
+        <Card className="border-none shadow-elegant overflow-hidden bg-white">
+          <CardHeader className="px-4 py-5 border-b bg-slate-50/30">
             <form
               className="flex flex-col gap-4"
               onSubmit={(e) => {
@@ -149,7 +149,7 @@ export function Clients() {
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
                     placeholder="Nom, email, ville..."
-                    className="pl-9 h-10 border-slate-200 dark:border-white/10 bg-white dark:bg-transparent"
+                    className="pl-9 h-10 border-slate-200 bg-white"
                   />
                 </div>
 
@@ -158,7 +158,7 @@ export function Clients() {
                   <select 
                     value={genderFilter}
                     onChange={(e) => { setGenderFilter(e.target.value); setPage(1); }}
-                    className="w-full pl-8 h-10 bg-white dark:bg-[#1a1a24] border border-slate-200 dark:border-white/10 rounded-md text-[11px] font-bold uppercase outline-none focus:ring-2 ring-violet-500/20"
+                    className="w-full pl-8 h-10 bg-white border border-slate-200 rounded-md text-[11px] font-bold uppercase outline-none focus:ring-2 ring-violet-500/20"
                   >
                     <option value="">Tous les Genres</option>
                     <option value="M">Homme</option>
@@ -198,17 +198,17 @@ export function Clients() {
           </CardHeader>
           
           <CardContent className="p-0">
-            <div className="divide-y dark:divide-white/5">
+            <div className="divide-y">
               {isLoading ? (
                 <div className="p-12 text-center animate-pulse text-slate-400 font-medium tracking-widest uppercase text-[10px]">Filtrage des données en cours...</div>
               ) : data?.results.map((client) => (
                 <div 
                   key={client.id} 
-                  className="flex items-center justify-between p-4 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors cursor-pointer group"
+                  className="flex items-center justify-between p-4 hover:bg-slate-50 transition-colors cursor-pointer group"
                   onClick={() => setSelectedClientId(client.id)}
                 >
                   <div className="flex items-center gap-4 min-w-0 pr-4">
-                    <div className="h-10 w-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center font-bold text-violet-500 border border-slate-200 dark:border-white/10 shrink-0">
+                    <div className="h-10 w-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-violet-500 border border-slate-200 shrink-0">
                       {client.first_name[0]}{client.last_name?.[0] || ''}
                     </div>
                     <div className="min-w-0">
@@ -234,7 +234,7 @@ export function Clients() {
             </div>
 
             {/* PAGINATION */}
-            <div className="p-4 bg-slate-50/50 dark:bg-white/5 flex items-center justify-between border-t dark:border-white/10">
+            <div className="p-4 bg-slate-50/50 flex items-center justify-between border-t">
               <Button variant="ghost" size="sm" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1} className="text-[10px] font-bold uppercase">
                 <ChevronLeftIcon className="mr-1" /> Précédent
               </Button>
@@ -250,7 +250,7 @@ export function Clients() {
         </Card>
       ) : (
         /* VUE CARTE */
-        <Card className="overflow-hidden border-none shadow-elegant rounded-2xl bg-white dark:bg-white/5">
+        <Card className="overflow-hidden border-none shadow-elegant rounded-2xl bg-white">
           <CardContent className="p-0">
             <div className="h-[600px] w-full relative">
               <MapContainer center={[18.5, -12.5]} zoom={6} style={{ height: '100%', width: '100%', background: '#0f172a' }}>
@@ -275,8 +275,8 @@ export function Clients() {
       {/* MODAL PROFIL */}
       {selectedClientId !== null && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-          <Card className="w-full max-w-xl bg-white dark:bg-[#0b0b13] shadow-2xl border-none rounded-3xl overflow-hidden animate-in zoom-in-95 duration-300">
-            <CardHeader className="bg-slate-50/50 dark:bg-white/5 border-b dark:border-white/10 p-6 relative">
+          <Card className="w-full max-w-xl bg-white shadow-2xl border-none rounded-3xl overflow-hidden animate-in zoom-in-95 duration-300">
+            <CardHeader className="bg-slate-50/50 border-b p-6 relative">
               <div className="flex items-center gap-4">
                 <div className={`h-14 w-14 rounded-2xl flex items-center justify-center text-white font-black text-xl ${clientDetails?.is_active ? 'bg-emerald-500' : 'bg-slate-500'}`}>
                   {clientDetails?.first_name[0]}
@@ -286,7 +286,7 @@ export function Clients() {
                   <CardDescription className="font-bold uppercase text-[10px] text-violet-500 tracking-widest">ID Client: {selectedClientId}</CardDescription>
                 </div>
               </div>
-              <button onClick={() => setSelectedClientId(null)} className="absolute right-6 top-6 p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full">
+              <button onClick={() => setSelectedClientId(null)} className="absolute right-6 top-6 p-2 text-slate-400 hover:bg-slate-100 rounded-full">
                 <Cross2Icon className="w-5 h-5" />
               </button>
             </CardHeader>
@@ -316,7 +316,7 @@ export function Clients() {
 
 function DetailBox({ label, value, isHighlight }: { label: string, value?: string | number, isHighlight?: boolean }) {
   return (
-    <div className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border dark:border-white/5">
+    <div className="p-3 rounded-xl bg-slate-50 border">
       <p className="text-[9px] font-black text-slate-400 uppercase mb-1">{label}</p>
       <p className={`text-xs font-bold truncate ${isHighlight ? 'text-violet-500' : ''}`}>{value || '-'}</p>
     </div>

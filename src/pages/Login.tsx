@@ -72,7 +72,7 @@ export function Login({ onSubmit, isLoading = false }: LoginProps) {
                 {isLoading ? 'Connexion...' : 'Continuer'}
               </Button>
 
-              {/* <div className="text-xs text-slate-500 dark:text-slate-400">
+              {/* <div className="text-xs text-slate-500">
                 API: `POST /auth/login/` puis verification MFA si requise.
               </div> */}
             </form>

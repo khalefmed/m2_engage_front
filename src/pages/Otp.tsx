@@ -74,25 +74,25 @@ export function Otp({ onVerify, isLoading = false, mode = 'login', setupData }: 
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               {mode === 'setup' && (
-                <div className="space-y-4 rounded-xl border border-violet-100/80 p-4 dark:border-white/10">
+                <div className="space-y-4 rounded-xl border border-violet-100/80 p-4">
                   {setupData?.qr_code_base64 ? (
                     <div className="flex justify-center bg-white p-2 rounded-lg max-w-[180px] mx-auto shadow-sm">
                         <img src={setupData.qr_code_base64} alt="QR Code MFA" className="h-40 w-40" />
                     </div>
                   ) : (
-                    <p className="text-xs text-amber-700 dark:text-amber-300 text-center">
+                    <p className="text-xs text-amber-700 text-center">
                       Configurez manuellement avec le secret ci-dessous.
                     </p>
                   )}
                   
                   {setupData?.secret ? (
-                    <div className="rounded-lg bg-violet-50/70 p-3 dark:bg-white/5 border border-violet-100 dark:border-white/5">
+                    <div className="rounded-lg bg-violet-50/70 p-3 border border-violet-100">
                       <div className="flex items-center justify-between mb-1.5">
-                        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Secret de secours</p>
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Secret de secours</p>
                         <button
                           type="button"
                           onClick={() => copyToClipboard(setupData.secret)}
-                          className="flex items-center gap-1.5 text-[10px] font-bold uppercase text-violet-600 hover:text-violet-800 dark:text-violet-400 dark:hover:text-violet-300 transition-all active:scale-95"
+                          className="flex items-center gap-1.5 text-[10px] font-bold uppercase text-violet-600 hover:text-violet-800 transition-all active:scale-95"
                         >
                           {copied ? (
                             <>
@@ -107,7 +107,7 @@ export function Otp({ onVerify, isLoading = false, mode = 'login', setupData }: 
                           )}
                         </button>
                       </div>
-                      <p className="break-all font-mono text-sm font-medium tracking-widest text-slate-700 dark:text-slate-200">
+                      <p className="break-all font-mono text-sm font-medium tracking-widest text-slate-700">
                         {setupData.secret}
                       </p>
                     </div>
@@ -116,7 +116,7 @@ export function Otp({ onVerify, isLoading = false, mode = 'login', setupData }: 
               )}
 
               <div className="space-y-3">
-                <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Code de vérification</label>
+                <label className="text-sm font-semibold text-slate-700">Code de vérification</label>
                 <div className="grid grid-cols-6 gap-2">
                   {code.map((digit, index) => (
                     <Input

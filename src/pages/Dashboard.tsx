@@ -49,7 +49,7 @@ export function Dashboard() {
     <div className="space-y-6 animate-fade-in pb-10">
       {/* Header */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
           Tableau de Bord
         </h1>
         <p className="text-sm text-slate-500">Indicateurs clés de performance globale.</p>
@@ -99,7 +99,7 @@ export function Dashboard() {
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Graphique Acquisition (Maintenant lié aux données de ventes réelles) */}
-        <Card className="lg:col-span-2 shadow-elegant border-none bg-white dark:bg-slate-900">
+        <Card className="lg:col-span-2 shadow-elegant border-none bg-white">
           <CardHeader>
             <CardTitle className="text-lg flex items-center gap-2">
               <UpdateIcon className="text-indigo-500" /> Évolution de l'Activité
@@ -134,7 +134,7 @@ export function Dashboard() {
         </Card>
 
         {/* Audience par Genre */}
-        <Card className="shadow-elegant border-none bg-white dark:bg-slate-900">
+        <Card className="shadow-elegant border-none bg-white">
           <CardHeader>
             <CardTitle className="text-lg">Répartition par Genre</CardTitle>
           </CardHeader>
@@ -145,7 +145,7 @@ export function Dashboard() {
                 background: `conic-gradient(#6366f1 0deg, #6366f1 ${genderStats.deg}deg, #f43f5e ${genderStats.deg}deg, #f43f5e 360deg)`,
               }}
             >
-              <div className="h-36 w-36 rounded-full bg-white dark:bg-slate-900 flex flex-col items-center justify-center shadow-lg">
+              <div className="h-36 w-36 rounded-full bg-white flex flex-col items-center justify-center shadow-lg">
                 <p className="text-4xl font-black text-indigo-600">{genderStats.percentage}%</p>
                 <p className="text-[10px] font-bold text-slate-400 uppercase">Femmes</p>
               </div>
@@ -169,7 +169,7 @@ export function Dashboard() {
         </h3>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {(dashboardData?.by_city || []).slice(0, 4).map((item: any) => (
-            <div key={item.city} className="p-5 rounded-2xl bg-white dark:bg-slate-900 shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col gap-2">
+            <div key={item.city} className="p-5 rounded-2xl bg-white shadow-sm border border-slate-100 flex flex-col gap-2">
               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{item.city}</p>
               <div className="flex justify-between items-end">
                 <p className="text-2xl font-bold">{Number(item.value).toLocaleString()}</p>

@@ -56,7 +56,7 @@ export function Settings() {
     <div className="space-y-6 animate-fade-in pb-10">
       <div className="space-y-1">
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Paramètres</h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
+        <p className="text-sm text-slate-500 font-medium">
           Gérez vos informations personnelles et votre sécurité.
         </p>
       </div>
@@ -64,8 +64,8 @@ export function Settings() {
       <div className="grid gap-6 lg:grid-cols-2">
         
         {/* SECTION PROFIL */}
-        <Card className="border-none shadow-elegant bg-white dark:bg-white/5 h-fit">
-          <CardHeader className="border-b dark:border-white/5">
+        <Card className="border-none shadow-elegant bg-white h-fit">
+          <CardHeader className="border-b">
             <div className="flex items-center gap-3">
               <PersonIcon className="w-5 h-5 text-violet-500" />
               <CardTitle className="text-lg">Mon Profil</CardTitle>
@@ -82,11 +82,11 @@ export function Settings() {
                   <ProfileItem label="Prénom" value={data.first_name} />
                   <ProfileItem label="Nom" value={data.last_name} />
                 </div>
-                <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-100">
                   <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Rôle</span>
                   <Badge variant="default" className="font-bold">{data.role}</Badge>
                 </div>
-                <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5">
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-100">
                   <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">MFA Status</span>
                   <Badge variant={data.is_mfa_enabled ? 'success' : 'warning'} className="font-bold">
                     {data.is_mfa_enabled ? 'Activé' : 'Désactivé'}
@@ -98,8 +98,8 @@ export function Settings() {
         </Card>
 
         {/* SECTION MOT DE PASSE */}
-        <Card className="border-none shadow-elegant bg-white dark:bg-white/5">
-          <CardHeader className="border-b dark:border-white/5">
+        <Card className="border-none shadow-elegant bg-white">
+          <CardHeader className="border-b">
             <div className="flex items-center gap-3">
               <LockClosedIcon className="w-5 h-5 text-violet-500" />
               <CardTitle className="text-lg">Sécurité</CardTitle>
@@ -113,7 +113,7 @@ export function Settings() {
                 <div className="relative">
                   <Input 
                     type={showPasswords ? "text" : "password"} 
-                    className="h-11 rounded-xl bg-slate-50/50 dark:bg-transparent"
+                    className="h-11 rounded-xl bg-slate-50/50"
                     value={passwordForm.old_password}
                     onChange={(e) => setPasswordForm({...passwordForm, old_password: e.target.value})}
                     placeholder="••••••••"
@@ -126,7 +126,7 @@ export function Settings() {
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nouveau mot de passe</label>
                 <Input 
                   type={showPasswords ? "text" : "password"} 
-                  className="h-11 rounded-xl bg-slate-50/50 dark:bg-transparent"
+                  className="h-11 rounded-xl bg-slate-50/50"
                   value={passwordForm.new_password}
                   onChange={(e) => setPasswordForm({...passwordForm, new_password: e.target.value})}
                   placeholder="Minimum 8 caractères"
@@ -138,7 +138,7 @@ export function Settings() {
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Confirmer le mot de passe</label>
                 <Input 
                   type={showPasswords ? "text" : "password"} 
-                  className="h-11 rounded-xl bg-slate-50/50 dark:bg-transparent"
+                  className="h-11 rounded-xl bg-slate-50/50"
                   value={passwordForm.confirm_password}
                   onChange={(e) => setPasswordForm({...passwordForm, confirm_password: e.target.value})}
                   placeholder="Confirmer le nouveau"
@@ -175,9 +175,9 @@ export function Settings() {
 // Composant interne pour les items de profil
 function ProfileItem({ label, value, isHighlight }: { label: string, value?: string, isHighlight?: boolean }) {
   return (
-    <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 flex flex-col gap-0.5">
+    <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex flex-col gap-0.5">
       <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{label}</span>
-      <span className={`text-sm font-bold truncate ${isHighlight ? 'text-violet-600 dark:text-violet-400' : 'text-slate-900 dark:text-white'}`}>
+      <span className={`text-sm font-bold truncate ${isHighlight ? 'text-violet-600' : 'text-slate-900'}`}>
         {value || '-'}
       </span>
     </div>

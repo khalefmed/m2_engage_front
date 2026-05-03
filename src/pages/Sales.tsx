@@ -47,12 +47,12 @@ export function Sales() {
   const maxSalesValue = Math.max(...chartData.map((d) => d.sales), 1)
 
   return (
-    <div className="space-y-8 animate-fade-in pb-10 text-slate-900 dark:text-slate-100">
+    <div className="space-y-8 animate-fade-in pb-10 text-slate-900">
       {/* Header avec bouton d'export ou action */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-6 dark:border-white/10">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b pb-6">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Registre des Ventes</h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400 flex items-center gap-2">
+          <p className="text-sm text-slate-500 flex items-center gap-2">
             <CounterClockwiseClockIcon /> Flux de transactions en temps réel.
           </p>
         </div>
@@ -90,7 +90,7 @@ export function Sales() {
 
       {/* Section Graphique & Top Catégories */}
       {/* <div className="grid gap-6 lg:grid-cols-3">
-        <Card className="lg:col-span-2 border-none shadow-elegant bg-white dark:bg-white/5">
+        <Card className="lg:col-span-2 border-none shadow-elegant bg-white">
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">Tendance des Ventes</CardTitle>
           </CardHeader>
@@ -111,7 +111,7 @@ export function Sales() {
           </CardContent>
         </Card>
 
-        <Card className="border-none shadow-elegant bg-white dark:bg-white/5">
+        <Card className="border-none shadow-elegant bg-white">
           <CardHeader>
             <CardTitle className="text-base">Top Catégories</CardTitle>
           </CardHeader>
@@ -122,7 +122,7 @@ export function Sales() {
                   <span className="text-slate-500">{cat}</span>
                   <span>{formatAmount(val as number)}</span>
                 </div>
-                <div className="h-1.5 w-full bg-slate-100 dark:bg-white/10 rounded-full overflow-hidden">
+                <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-violet-500 rounded-full" 
                     style={{ width: `${Math.min(((val as number) / (statsQuery.data?.total_revenue || 1)) * 100, 100)}%` }} 
@@ -135,25 +135,25 @@ export function Sales() {
       </div> */}
 
       {/* Liste des Ventes - Refonte en mode "Clean List" */}
-      <Card className="border-none shadow-elegant bg-white dark:bg-white/5 overflow-hidden">
-        <CardHeader className="bg-slate-50/50 dark:bg-white/5 border-b dark:border-white/10">
+      <Card className="border-none shadow-elegant bg-white overflow-hidden">
+        <CardHeader className="bg-slate-50/50 border-b">
           <div className="flex items-center justify-between">
             <CardTitle className="text-lg">Historique des Transactions</CardTitle>
-            <Badge className="bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300 border-none font-mono">
+            <Badge className="bg-slate-200 text-slate-600 border-none font-mono">
               {salesQuery.data?.results.length || 0} ITEMS
             </Badge>
           </div>
         </CardHeader>
         <CardContent className="p-0">
-          <div className="divide-y dark:divide-white/5">
+          <div className="divide-y">
             {salesQuery.data?.results.map((sale) => (
               <div 
                 key={sale.id} 
-                className="group flex items-center justify-between p-4 hover:bg-slate-50 dark:hover:bg-white/5 transition-all cursor-pointer"
+                className="group flex items-center justify-between p-4 hover:bg-slate-50 transition-all cursor-pointer"
                 onClick={() => setSelectedSaleId(sale.id)}
               >
                 <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 rounded-xl bg-slate-100 dark:bg-white/10 flex items-center justify-center text-slate-400 group-hover:bg-violet-600 group-hover:text-white transition-colors">
+                  <div className="h-10 w-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-violet-600 group-hover:text-white transition-colors">
                     <FileTextIcon />
                   </div>
                   <div>
@@ -165,7 +165,7 @@ export function Sales() {
                 </div>
                 <div className="flex items-center gap-6">
                   <div className="text-right">
-                    <p className="text-sm font-black text-violet-600 dark:text-violet-400">{formatAmount(sale.total_amount)}</p>
+                    <p className="text-sm font-black text-violet-600">{formatAmount(sale.total_amount)}</p>
                     <Badge className="text-[9px] h-4 bg-emerald-500/10 text-emerald-600 border-none px-1">COMPLÉTÉ</Badge>
                   </div>
                   <ChevronRightIcon className="text-slate-300 group-hover:translate-x-1 transition-transform" />
@@ -179,8 +179,8 @@ export function Sales() {
       {/* Modal Facture Détail */}
       {selectedSaleId !== null && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-          <Card className="w-full max-w-2xl bg-white dark:bg-slate-950 shadow-2xl border-none overflow-hidden animate-in zoom-in-95 duration-200">
-            <CardHeader className="bg-slate-50 dark:bg-white/5 border-b dark:border-white/10 relative">
+          <Card className="w-full max-w-2xl bg-white shadow-2xl border-none overflow-hidden animate-in zoom-in-95 duration-200">
+            <CardHeader className="bg-slate-50 border-b relative">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-violet-600 rounded-lg text-white"><FileTextIcon className="w-5 h-5" /></div>
                 <div>
@@ -208,11 +208,11 @@ export function Sales() {
 
                   <div className="space-y-3">
                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Articles commandés</p>
-                    <div className="divide-y dark:divide-white/5 border rounded-xl overflow-hidden dark:border-white/10">
+                    <div className="divide-y border rounded-xl overflow-hidden">
                       {saleDetailsQuery.data.items?.map((item) => (
-                        <div key={item.id} className="flex items-center justify-between p-3 bg-slate-50/30 dark:bg-transparent">
+                        <div key={item.id} className="flex items-center justify-between p-3 bg-slate-50/30">
                           <div className="flex items-center gap-3">
-                            <span className="h-6 w-6 rounded bg-violet-100 dark:bg-violet-500/20 text-violet-600 flex items-center justify-center text-[10px] font-bold">{item.quantity}x</span>
+                            <span className="h-6 w-6 rounded bg-violet-100 text-violet-600 flex items-center justify-center text-[10px] font-bold">{item.quantity}x</span>
                             <p className="text-sm font-bold">{item.product_name}</p>
                           </div>
                           <p className="text-sm font-black font-mono">{formatAmount(item.subtotal)}</p>
@@ -221,12 +221,12 @@ export function Sales() {
                     </div>
                   </div>
 
-                  <div className="pt-6 border-t dark:border-white/10 flex justify-between items-end">
+                  <div className="pt-6 border-t flex justify-between items-end">
                     <div>
                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total de la commande</p>
                       <p className="text-[10px] text-slate-400 italic">Toutes taxes comprises</p>
                     </div>
-                    <span className="text-4xl font-black text-violet-600 dark:text-violet-400 tracking-tighter">
+                    <span className="text-4xl font-black text-violet-600 tracking-tighter">
                       {formatAmount(saleDetailsQuery.data.total_amount)}
                     </span>
                   </div>
@@ -243,9 +243,9 @@ export function Sales() {
 // Sous-composant StatCard
 function StatCard({ title, value, icon }: { title: string, value: string | number, icon: React.ReactNode }) {
   return (
-    <Card className="border-none shadow-sm bg-white dark:bg-white/5">
+    <Card className="border-none shadow-sm bg-white">
       <CardContent className="p-5 flex items-center align-center justify-center gap-4">
-        <div className="p-3 bg-slate-50 dark:bg-white/10 rounded-2xl">{icon}</div>
+        <div className="p-3 bg-slate-50 rounded-2xl">{icon}</div>
         <div>
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{title}</p>
           <p className="text-xl font-black tracking-tight">{value}</p>

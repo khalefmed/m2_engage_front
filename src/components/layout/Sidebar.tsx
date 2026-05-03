@@ -34,9 +34,9 @@ export function Sidebar({ onLogout, currentUser }: SidebarProps) {
   const userRole = currentUser?.role ?? 'Membre'
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-50 hidden w-72 border-r border-violet-100/80 bg-white/85 backdrop-blur-xl dark:border-white/10 dark:bg-[#0b0b13]/85 lg:flex">
+    <aside className="fixed inset-y-0 left-0 z-50 hidden w-72 border-r border-violet-100/80 bg-white/85 backdrop-blur-xl lg:flex">
       <div className="flex h-full w-full flex-col">
-        <div className="flex py-4 items-center justify-between border-b border-violet-100/80 px-6 dark:border-white/10">
+        <div className="flex py-4 items-center justify-between border-b border-violet-100/80 px-6">
     
           <img src="../logo.png" className='h-16'  alt="" />
         </div>
@@ -59,13 +59,13 @@ export function Sidebar({ onLogout, currentUser }: SidebarProps) {
                   'group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all',
                   isActive
                     ? 'bg-gradient-to-r from-violet-600 to-blue-600 text-white shadow-lg'
-                    : 'text-slate-600 hover:bg-violet-50 hover:text-violet-700 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white'
+                    : 'text-slate-600 hover:bg-violet-50 hover:text-violet-700'
                 )
               }
             >
               {({ isActive }) => (
                 <>
-                  <item.icon className={cn('h-4 w-4', isActive ? 'text-white' : 'text-violet-500 dark:text-violet-300')} />
+                  <item.icon className={cn('h-4 w-4', isActive ? 'text-white' : 'text-violet-500')} />
                   {item.name}
                 </>
               )}
@@ -73,8 +73,8 @@ export function Sidebar({ onLogout, currentUser }: SidebarProps) {
           ))}
         </nav>
 
-        <div className="border-t border-violet-100/80 p-4 dark:border-white/10">
-          <div className="mb-3 flex items-center gap-3 rounded-xl bg-violet-50/70 p-3 dark:bg-white/5">
+        <div className="border-t border-violet-100/80 p-4">
+          <div className="mb-3 flex items-center gap-3 rounded-xl bg-violet-50/70 p-3">
             <img
               src="../avatar.png"
               alt="profil"
@@ -82,7 +82,7 @@ export function Sidebar({ onLogout, currentUser }: SidebarProps) {
             />
             <div className="min-w-0">
               <p className="truncate text-sm font-semibold">{userName}</p>
-              <p className="truncate text-xs text-slate-500 dark:text-slate-400">{userRole}</p>
+              <p className="truncate text-xs text-slate-500">{userRole}</p>
             </div>
           </div>
           <Button type="button" onClick={onLogout} variant="secondary" className="w-full justify-start gap-2">
