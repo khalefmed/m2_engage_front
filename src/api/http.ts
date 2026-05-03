@@ -27,7 +27,14 @@ export async function apiRequest<T>(path: string, options: ApiRequestOptions = {
   const { auth = false, authToken, headers, ...rest } = options
   const requestHeaders = new Headers(headers ?? {})
 
-  requestHeaders.set('Content-Type', 'application/json')
+  /**
+   * ADAPTATION : Gestion intelligente du Content-Type
+   * Si on envoie un fichier (FormData), on ne force pas 'application/json'.
+   * Le navigateur doit gérer lui-même le boundary du multipart/form-data.
+   */
+  if (!(rest.body instanceof FormData)) {
+    requestHeaders.set('Content-Type', 'application/json')
+  }
 
   const token = authToken ?? (auth ? getAccessToken() : null)
   if (token) {
@@ -39,11 +46,14 @@ export async function apiRequest<T>(path: string, options: ApiRequestOptions = {
     headers: requestHeaders,
   })
 
-  const isJson = response.headers.get('content-type')?.includes('application/json')
+  // Vérification de la présence de contenu avant de tenter le parsing JSON
+  const contentType = response.headers.get('content-type')
+  const isJson = contentType?.includes('application/json')
   const data = isJson ? await response.json() : null
 
   if (!response.ok) {
-    const message = (data && (data.detail || data.error)) || `Erreur API (${response.status})`
+    // Gestion d'erreur plus robuste
+    const message = (data && (data.detail || data.error || data.message)) || `Erreur API (${response.status})`
     throw new Error(message)
   }
 

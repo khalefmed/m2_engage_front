@@ -27,10 +27,12 @@ export interface AuthMe {
 }
 
 export interface ClientItem {
-  id: number
-  first_name: string
-  email: string
-  city: string
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  city: string;
+  is_active: boolean; // Nouveau
 }
 
 export interface ClientDetail extends ClientItem {
@@ -39,6 +41,7 @@ export interface ClientDetail extends ClientItem {
   phone?: string
   created_at?: string
   updated_at?: string
+  last_purchase_date: string | null
 }
 
 export interface SegmentRules {
