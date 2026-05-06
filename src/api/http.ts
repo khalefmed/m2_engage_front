@@ -1,6 +1,6 @@
 // const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/api').replace(/\/$/, '')
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8000/api').replace(/\/$/, '')
-// const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'https://m2engageback-production.up.railway.app/api').replace(/\/$/, '')
+// const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8000/api').replace(/\/$/, '')
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'https://m2engageback-production.up.railway.app/api').replace(/\/$/, '')
 const ACCESS_TOKEN_KEY = 'marketing_access_token'
 const REFRESH_TOKEN_KEY = 'marketing_refresh_token'
 
