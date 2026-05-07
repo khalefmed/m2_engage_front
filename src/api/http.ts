@@ -1,6 +1,7 @@
 // const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000/api').replace(/\/$/, '')
 // const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8000/api').replace(/\/$/, '')
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'https://m2engageback-production.up.railway.app/api').replace(/\/$/, '')
+// const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'https://m2engageback-production.up.railway.app/api').replace(/\/$/, '')
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'https://khalefmohamed.pythonanywhere.com/api').replace(/\/$/, '')
 const ACCESS_TOKEN_KEY = 'marketing_access_token'
 const REFRESH_TOKEN_KEY = 'marketing_refresh_token'
 
@@ -52,6 +53,15 @@ export async function apiRequest<T>(path: string, options: ApiRequestOptions = {
   const data = isJson ? await response.json() : null
 
   if (!response.ok) {
+    console.error('API Error:', {
+      status: response.status,
+      statusText: response.statusText,
+      url: response.url,
+      method: options.method || 'GET',
+      requestHeaders: Object.fromEntries(requestHeaders.entries()),
+      requestBody: rest.body,
+      responseData: data,
+    })
     // Gestion d'erreur plus robuste
     const message = (data && (data.detail || data.error || data.message)) || `Erreur API (${response.status})`
     throw new Error(message)
