@@ -32,10 +32,13 @@ export function Header({ currentUser }: HeaderProps) {
   }, [location.pathname])
 
   return (
-    <header className="sticky top-0 z-40 border-b border-violet-100/70 bg-white/75 backdrop-blur-xl">
+    <header className="app-header-surface sticky top-0 z-40 border-b border-violet-100/70 bg-white/75 backdrop-blur-xl">
       <div className="flex h-16 items-center gap-4 px-4 sm:px-6">
         <div className="flex min-w-0 flex-1 items-center gap-3">
-          <img src="../logo.png" className='h-12 min-lg:hidden' alt="" />
+          <picture className="lg:hidden">
+            <source srcSet="/logo-dark-mode.png" media="(prefers-color-scheme: dark)" />
+            <img src="/logo.png" className="h-12" alt="M2 Engage" />
+          </picture>
           {/* <div className="relative w-full max-w-xl">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <Input
@@ -50,7 +53,7 @@ export function Header({ currentUser }: HeaderProps) {
             type="button"
             variant="ghost"
             size="icon"
-            className="rounded-xl border border-violet-100/80 bg-white/80 text-slate-700 hover:bg-violet-50 lg:hidden"
+            className="app-user-panel rounded-xl border border-violet-100/80 bg-white/80 text-slate-700 hover:bg-violet-50 lg:hidden"
             onClick={() => setIsMobileMenuOpen((open) => !open)}
             aria-label={isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
             aria-expanded={isMobileMenuOpen}
@@ -65,7 +68,7 @@ export function Header({ currentUser }: HeaderProps) {
             <PlusIcon className="h-4 w-4" />
             Nouvelle campagne
           </Button> */}
-          <div className="hidden items-center gap-2 rounded-xl border border-violet-100/80 bg-white/80 px-2 py-1.5 lg:flex">
+          <div className="app-user-panel hidden items-center gap-2 rounded-xl border border-violet-100/80 bg-white/80 px-2 py-1.5 lg:flex">
             <img src="../avatar.png" alt="profil" className="h-7 w-7 rounded-full object-cover" />
             <div className="leading-tight">
               <p className="text-sm font-medium">{userName}</p>
@@ -77,7 +80,7 @@ export function Header({ currentUser }: HeaderProps) {
 
       {isMobileMenuOpen && (
         <div className="border-t border-violet-100/70 px-4 py-4 lg:hidden">
-          <div className="mb-4 flex items-center gap-3 rounded-2xl border border-violet-100/80 bg-white/80 p-3">
+          <div className="app-user-panel mb-4 flex items-center gap-3 rounded-2xl border border-violet-100/80 bg-white/80 p-3">
             <img src="../avatar.png" alt="profil" className="h-10 w-10 rounded-full object-cover" />
             <div className="min-w-0">
               <p className="truncate text-sm font-semibold text-slate-900">{userName}</p>

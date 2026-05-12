@@ -139,7 +139,7 @@ export function Sales() {
         <CardHeader className="bg-slate-50/50 border-b">
           <div className="flex items-center justify-between">
             <CardTitle className="text-lg">Historique des Transactions</CardTitle>
-            <Badge className="bg-slate-200 text-slate-600 border-none font-mono">
+            <Badge className="bg-slate-200 dark:bg-slate-900 text-slate-600 border-none font-mono">
               {salesQuery.data?.results.length || 0} ITEMS
             </Badge>
           </div>

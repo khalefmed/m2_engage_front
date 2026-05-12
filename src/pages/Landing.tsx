@@ -109,7 +109,10 @@ export function Landing() {
             <p className="text-[10px] uppercase tracking-[0.4em] text-indigo-600 font-semibold">Marketing</p>
           </div>
         </div> */}
-        <img src="../logo.png" className='h-12'  alt="" />
+        <picture>
+          <source srcSet="/logo-dark-mode.png" media="(prefers-color-scheme: dark)" />
+          <img src="/logo.png" className="h-12" alt="M2 Engage" />
+        </picture>
 
         <nav className="hidden items-center gap-8 text-sm font-medium text-slate-500 lg:flex">
           <a href="#main" className="transition hover:text-indigo-600">Acceuil</a>
@@ -140,7 +143,7 @@ export function Landing() {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <Link to="/app/dashboard" className={cn(buttonVariants(), 'h-11 px-6 bg-indigo-600 hover:bg-indigo-700 shadow-md shadow-indigo-100')}>
+              <Link to="/app/dashboard" className={cn(buttonVariants(), 'h-11 px-6 bg-indigo-600 hover:bg-indigo-700 shadow-md')}>
                 Lancer l'application
               </Link>
               <a href="#contact" className={cn(buttonVariants({ variant: 'secondary' }), 'h-11 px-6 border-slate-200 bg-white')}>
@@ -239,7 +242,7 @@ export function Landing() {
             {pricingPlans.map((plan) => (
               <Card key={plan.name} className={cn(
                 "relative border transition-all duration-300",
-                plan.highlight ? "border-indigo-500 shadow-2xl scale-105 z-10 bg-white" : "border-slate-200 bg-white/50 hover:bg-white"
+                plan.highlight ? "landing-pricing-card-highlight border-indigo-500 shadow-2xl scale-105 z-10 bg-white" : "landing-pricing-card border-slate-200 bg-white/50 hover:bg-white"
               )}>
                 {plan.highlight && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-indigo-600 text-[10px] font-bold text-white rounded-full uppercase tracking-widest">

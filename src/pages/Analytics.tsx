@@ -189,7 +189,7 @@ const generatePDF = () => {
               </select>
             </div>
           </div>
-          <Badge className="bg-violet-100 text-violet-700">
+          <Badge className="bg-violet-100 dark:bg-slate-900 text-violet-700">
             {kpis?.total_customers} clients ciblés
           </Badge>
         </CardContent>

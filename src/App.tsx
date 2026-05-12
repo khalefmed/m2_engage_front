@@ -184,6 +184,7 @@ function App() {
         />
 
         <Route path="/" element={<Landing />} />
+        <Route path="/app" element={<Navigate to="/app/dashboard" replace />} />
 
         <Route element={<ProtectedLayout authStep={authStep} onLogout={handleLogout} currentUser={currentUser} />}>
           <Route path="/app/dashboard" element={<Dashboard />} />
@@ -195,6 +196,7 @@ function App() {
           <Route path="/app/analytics" element={<Analytics />} />
           <Route path="/app/settings" element={<Settings />} />
         </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Toaster position="bottom-right" />
     </BrowserRouter>

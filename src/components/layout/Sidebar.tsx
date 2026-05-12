@@ -37,8 +37,10 @@ export function Sidebar({ onLogout, currentUser }: SidebarProps) {
     <aside className="fixed inset-y-0 left-0 z-50 hidden w-72 border-r border-violet-100/80 bg-white/85 backdrop-blur-xl lg:flex">
       <div className="flex h-full w-full flex-col">
         <div className="flex py-4 items-center justify-between border-b border-violet-100/80 px-6">
-    
-          <img src="../logo.png" className='h-16'  alt="" />
+          <picture>
+            <source srcSet="/logo-dark-mode.png" media="(prefers-color-scheme: dark)" />
+            <img src="/logo.png" className="h-16" alt="M2 Engage" />
+          </picture>
         </div>
         <br />
 
@@ -74,7 +76,7 @@ export function Sidebar({ onLogout, currentUser }: SidebarProps) {
         </nav>
 
         <div className="border-t border-violet-100/80 p-4">
-          <div className="mb-3 flex items-center gap-3 rounded-xl bg-violet-50/70 p-3">
+          <div className="app-user-panel mb-3 flex items-center gap-3 rounded-xl bg-violet-50/70 p-3">
             <img
               src="../avatar.png"
               alt="profil"

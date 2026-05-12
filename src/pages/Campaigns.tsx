@@ -178,7 +178,7 @@ export function Campaigns() {
             {filteredCampaigns.map((campaign) => (
               <div key={campaign.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 hover:bg-slate-50 transition-all">
                 <div className="flex items-start gap-3">
-                  <div className={`mt-1 p-2.5 rounded-xl shrink-0 ${ (campaign as any).type === 'sms' ? 'bg-amber-100 text-amber-600' : 'bg-violet-100 text-violet-600' }`}>
+                  <div className={`mt-1 p-2.5 rounded-xl shrink-0 ${ (campaign as any).type === 'sms' ? 'bg-amber-100 dark:bg-amber-400 text-amber-600' : 'bg-violet-100 dark:bg-violet-400 text-violet-600 dark:text-violet-800' }`}>
                     {(campaign as any).type === 'sms' ? <ChatBubbleIcon className="h-5 w-5" /> : <EnvelopeClosedIcon className="h-5 w-5" />}
                   </div>
                   <div className="min-w-0 flex-1">
