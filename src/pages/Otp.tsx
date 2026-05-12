@@ -127,6 +127,7 @@ export function Otp({ onVerify, isLoading = false, mode = 'login', setupData }: 
                       inputMode="numeric"
                       pattern="[0-9]*"
                       maxLength={1}
+                      autoFocus={index === 0 ? true : false}
                       value={digit}
                       onChange={(e) => handleChange(index, e.target.value)}
                       onKeyDown={(e) => handleKeyDown(index, e)}
