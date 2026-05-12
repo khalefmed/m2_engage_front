@@ -66,26 +66,26 @@ const contactItems = [
 
 const pricingPlans = [
   {
-    name: 'Mensuel',
-    price: '9 900',
-    unit: 'MRU/mois',
+    name: 'Plan',
+    price: 'Mensuel',
+    unit: '',
     description: 'Idéal pour tester la puissance de la segmentation sur vos premières campagnes.',
     features: ['Jusqu’à 5 000 contacts', 'Canaux SMS & Email', 'Support standard'],
     cta: 'Démarrer le mois',
     highlight: false
   },
   {
-    name: 'Annuel',
-    price: '99 000',
-    unit: 'MRU/an',
+    name: 'Plan',
+    price: 'Annuel',
+    unit: '',
     description: 'La solution complète pour une stratégie marketing durable et performante.',
     features: ['Contacts illimités', 'Omnicanalité complète', 'Analytique avancée', '2 mois offerts'],
     cta: 'Choisir l’annuel',
     highlight: true
   },
   {
-    name: 'Sur-mesure',
-    price: 'Contact',
+    name: 'Plan',
+    price: 'Sur-mesure',
     unit: '',
     description: 'Besoin de déploiements spécifiques ou d’un accompagnement dédié ?',
     features: ['Infrastructure dédiée', 'API personnalisée', 'Account Manager dédié'],
