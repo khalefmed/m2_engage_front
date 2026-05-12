@@ -59,7 +59,7 @@ const useCases = [
 ]
 
 const contactItems = [
-  { label: 'Email', value: 'contact@m2engage.com' },
+  { label: 'Email', value: 'contact@a2m.com' },
   { label: 'Mobile', value: '+222 44 30 20 57' },
   { label: 'Siège', value: 'Nouakchott, Mauritanie' },
 ]
